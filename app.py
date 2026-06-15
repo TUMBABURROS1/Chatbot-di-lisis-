@@ -39,6 +39,10 @@ alimentos_db = {
     "carnes procesadas": "🔴 **Carnes procesadas**: No se pueden consumir. Dañan el control de toxinas en hemodiálisis.",
     "quesos": "🔴 **Quesos**: En general, la mayoría de los quesos (especialmente maduros o procesados) no se pueden consumir.",
     "queso": "🔴 **Queso**: En general, la mayoría de los quesos no se pueden consumir por su aporte de fósforo.",
+    "papas fritas": "🔴 **Papas fritas**: No se pueden consumir. Además de la enorme cantidad de potasio de la papa, contienen exceso de sodio y grasas por la fritura.",
+    "papas": "🔴 **Papas**: No se pueden consumir de forma libre por su altísimo contenido de potasio (a menos que pasen por un proceso estricto de doble cocción y remojo).",
+    "papa": "🔴 **Papa**: No se puede consumir libremente debido a sus elevados niveles de potasio, peligrosos para el corazón en diálisis.",
+    
 
     # CON MODERACIÓN (Amarillo)
     "refresco claro": "🟡 **Refresco claro**: Se debe consumir con moderación e idealmente bajo las especificaciones de tu nutriólogo.",
