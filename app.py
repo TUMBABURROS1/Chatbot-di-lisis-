@@ -4,13 +4,13 @@ import openai
 # Configuración de la interfaz de la página
 st.set_page_config(page_title="Chatbot de Nutrición Renal", page_icon="🍎")
 
-# Llave API integrada (OpenAI)
-openai.api_key = "AQ.Ab8RN6KkzCycaAsqrsj2ZplsccBfTkkArejOMR5CU8adacWIWQ"
+# Llave API integrada usando los Secrets seguros de Streamlit
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Base de datos completa de alimentos (Original + Ajustes + Apuntes Nuevos)
 alimentos_db = {
     # SE PUEDE CONSUMIR (Verde)
-    "pechuga de pollo": "se puede consumir",
+    "pechuga de pollo": "se puede conocer",
     "pechuga de pavo": "se puede consumir",
     "clara de huevo": "se puede consumir",
     "claras de huevo": "se puede consumir",
@@ -24,7 +24,7 @@ alimentos_db = {
     "arandanos": "se puede consumir",
     "uva": "se puede consumir",
     "uvas": "se puede consumir",
-    "gelatina": "se puede consumir",
+    "gelatina": "se puede conocer",
     "manzana": "se puede consumir",
     "arroz": "se puede consumir",
     
@@ -115,7 +115,7 @@ if user_query := st.chat_input("Escribe el nombre de un alimento o consulta"):
     if not respuesta_encontrada:
         for alimento, semaforo in alimentos_db.items():
             if alimento in query_lower:
-                if semaforo == "se puede consumir":
+                if "puede" in semaforo:
                     respuesta_encontrada = f"🟢 **{alimento.capitalize()}**: Se puede consumir libremente en la dieta para diálisis."
                 elif "moderación" in semaforo:
                     respuesta_encontrada = f"🟡 **{alimento.capitalize()}**: Se debe consumir con moderación e idealmente bajo las especificaciones de tu nutriólogo."
@@ -141,4 +141,4 @@ if user_query := st.chat_input("Escribe el nombre de un alimento o consulta"):
     st.session_state.messages.append({"role": "assistant", "content": respuesta_encontrada})
     with st.chat_message("assistant"):
         st.write(respuesta_encontrada)
-        
+            
