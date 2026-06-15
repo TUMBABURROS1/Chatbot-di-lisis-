@@ -4,13 +4,16 @@ import openai
 # Configuración de la interfaz de la página
 st.set_page_config(page_title="Chatbot de Nutrición Renal", page_icon="🍎")
 
-# Llave API integrada usando los Secrets seguros de Streamlit
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+# Intentar usar la llave de los secrets (si no es válida, el código no se caerá)
+try:
+    openai.api_key = st.secrets["OPENAI_API_KEY"]
+except:
+    openai.api_key = "no_key"
 
-# Base de datos completa de alimentos (Original + Ajustes + Apuntes Nuevos)
+# Base de datos completa de alimentos
 alimentos_db = {
     # SE PUEDE CONSUMIR (Verde)
-    "pechuga de pollo": "se puede conocer",
+    "pechuga de pollo": "se puede consumir",
     "pechuga de pavo": "se puede consumir",
     "clara de huevo": "se puede consumir",
     "claras de huevo": "se puede consumir",
@@ -24,55 +27,55 @@ alimentos_db = {
     "arandanos": "se puede consumir",
     "uva": "se puede consumir",
     "uvas": "se puede consumir",
-    "gelatina": "se puede conocer",
+    "gelatina": "se puede consumir",
     "manzana": "se puede consumir",
     "arroz": "se puede consumir",
     
     # CON MODERACIÓN (Amarillo)
-    "queso cottage": "con moderación",
-    "queso cottage bajo en sodio": "con moderación",
-    "productos integrales": "con moderación",
-    "lacteos": "con moderación",
-    "leche": "con moderación (máximo 1/2 taza al día)",
-    "sandia": "con moderación",
-    "refrescos": "con moderación (solo claros)",
-    "refresco": "con moderación (solo claros)",
-    "refresco claro": "con moderación",
-    "refrescos claros": "con moderación",
-    "aceite": "con moderación",
-    "aceite de oliva": "con moderación",
-    "aceite vegetal": "con moderación",
+    "queso cottage": "con moderacion",
+    "queso cottage bajo en sodio": "con moderacion",
+    "productos integrales": "con moderacion",
+    "lacteos": "con moderacion",
+    "leche": "con moderacion (maximo 1/2 taza al dia)",
+    "sandia": "con moderacion",
+    "refrescos": "con moderacion (solo claros)",
+    "refresco": "con moderacion (solo claros)",
+    "refresco claro": "con moderacion",
+    "refrescos claros": "con moderacion",
+    "aceite": "con moderacion",
+    "aceite de oliva": "con moderacion",
+    "aceite vegetal": "con moderacion",
     
     # NO SE PUEDEN CONSUMIR (Rojo)
-    "quesos": "no se pueden consumir",
-    "queso": "no se pueden consumir",
-    "queso amarillo": "no se pueden consumir",
-    "queso tipo americano": "no se pueden consumir",
-    "quesos procesados": "no se pueden consumir",
-    "frutos secos": "no se pueden consumir",
-    "cerveza": "no se pueden consumir",
-    "chocolates": "no se pueden consumir",
-    "embutidos": "no se pueden consumir",
-    "sopas instantaneas": "no se pueden consumir",
-    "alimentos enlatados": "no se pueden consumir",
-    "botana salada": "no se pueden consumir",
-    "salsa embotellada": "no se pueden consumir",
-    "comida rapida": "no se pueden consumir",
-    "encurtidos": "no se pueden consumir",
-    "carne ahumada": "no se pueden consumir",
-    "pescado ahumado": "no se pueden consumir",
-    "carambola": "no se pueden consumir",
-    "toronja": "no se pueden consumir",
-    "caldos": "no se pueden consumir",
-    "perros calientes": "no se pueden consumir",
-    "chili enlatado": "no se pueden consumir",
-    "carnes procesadas": "no se pueden consumir",
-    "refrescos oscuros": "no se pueden consumir",
-    "refresco oscuro": "no se pueden consumir",
-    "refresco negro": "no se pueden consumir",
+    "quesos": "no se puede consumir",
+    "queso": "no se puede consumir",
+    "queso amarillo": "no se puede consumir",
+    "queso tipo americano": "no se puede consumir",
+    "quesos procesados": "no se puede consumir",
+    "frutos secos": "no se puede consumir",
+    "cerveza": "no se puede consumir",
+    "chocolates": "no se puede consumir",
+    "embutidos": "no se puede consumir",
+    "sopas instantaneas": "no se puede consumir",
+    "alimentos enlatados": "no se puede consumir",
+    "botana salada": "no se puede consumir",
+    "salsa embotellada": "no se puede consumir",
+    "comida rapida": "no se puede consumir",
+    "encurtidos": "no se puede consumir",
+    "carne ahumada": "no se puede consumir",
+    "pescado ahumado": "no se puede consumir",
+    "carambola": "no se puede consumir",
+    "toronja": "no se puede consumir",
+    "caldos": "no se puede consumir",
+    "perros calientes": "no se puede consumir",
+    "chili enlatado": "no se puede consumir",
+    "carnes procesadas": "no se puede consumir",
+    "refrescos oscuros": "no se puede consumir",
+    "refresco oscuro": "no se puede consumir",
+    "refresco negro": "no se puede consumir",
 }
 
-# Respuestas temáticas conceptuales basadas en apuntes oficiales (NIDDK / menutritionpr)
+# Respuestas temáticas conceptuales basadas en tus apuntes
 respuestas_tematicas = {
     "liquidos": "Durante la hemodiálisis, las toxinas y excesos de líquidos pueden acumularse en el organismo. El exceso de líquidos puede causar aumento de peso entre sesiones, cambios en la presión arterial, problemas cardíacos graves e incluso acumulación en los pulmones dificultando la respiración. Se debe limitar estrictamente el sodio, potasio y fósforo para ayudar a controlarlo.",
     "agua": "Durante la hemodiálisis, las toxinas y excesos de líquidos pueden acumularse en el organismo. El exceso de líquidos puede causar aumento de peso entre sesiones, cambios en la presión arterial, problemas cardíacos graves e incluso acumulación en los pulmones dificultando la respiración. Se debe limitar estrictamente el sodio, potasio y fósforo para ayudar a controlarlo.",
@@ -82,6 +85,9 @@ respuestas_tematicas = {
     "dulces": "Los caramelos duros, el azúcar, la miel, la mermelada y la jalea proporcionan calorías y energía rápida sin grasas y sin añadir minerales dañinos al cuerpo. Sin embargo, si el paciente padece diabetes, debe tener mucho cuidado y consultar las porciones.",
     "vitaminas": "La hemodiálisis elimina algunas vitaminas esenciales del organismo. El médico especialista puede recetar un suplemento diseñado específicamente para la insuficiencia renal. ADVERTENCIA: Nunca se deben tomar suplementos nutricionales que se compren sin receta médica, ya que pueden contener minerales perjudiciales.",
 }
+
+# Lista de saludos que activarán el mensaje de inicio
+saludos_db = ["hola", "buen dia", "buenas tardes", "buenas noches", "que onda", "saludos"]
 
 # Inicializar el historial de chat en la sesión
 if "messages" not in st.session_state:
@@ -96,34 +102,41 @@ for message in st.session_state.messages:
 
 # Entrada de texto del usuario
 if user_query := st.chat_input("Escribe el nombre de un alimento o consulta"):
-    # Guardar y mostrar la pregunta del usuario
     st.session_state.messages.append({"role": "user", "content": user_query})
     with st.chat_message("user"):
         st.write(user_query)
         
-    # Pasar la consulta a minúsculas para facilitar la búsqueda
-    query_lower = user_query.lower()
+    # Procesar texto: minúsculas, quitar espacios y eliminar acentos manualmente
+    query_lower = user_query.lower().strip()
+    quitar_acentos = str.maketrans("áéíóúü", "aeiouu")
+    query_lower = query_lower.translate(quitar_acentos)
     
-    # 1. PASO: Verificar si coincide con algún tema conceptual de los apuntes
     respuesta_encontrada = None
-    for tema, texto in respuestas_tematicas.items():
-        if tema in query_lower:
-            respuesta_encontrada = f"🤖 **Información sobre {tema.capitalize()}:** {texto}\n\n*Recuerda que este chatbot fue creado con fines educativos.*"
-            break
+    
+    # 1. PASO: Si dice "Hola", repetir exactamente el saludo inicial
+    if query_lower in saludos_db:
+        respuesta_encontrada = "Hola, buen día, ¿en qué te gustaría que te ayudara en el día de hoy? 😀"
+
+    # 2. PASO: Verificar si coincide con algún tema de los apuntes
+    if not respuesta_encontrada:
+        for tema, texto in respuestas_tematicas.items():
+            if tema in query_lower:
+                respuesta_encontrada = f"🤖 **Información sobre {tema.capitalize()}:** {texto}\n\n*Recuerda que este chatbot fue creado con fines educativos.*"
+                break
             
-    # 2. PASO: Si no fue un tema, verificar si coincide con la base de datos de alimentos
+    # 3. PASO: Verificar si coincide con la base de datos de alimentos
     if not respuesta_encontrada:
         for alimento, semaforo in alimentos_db.items():
             if alimento in query_lower:
-                if "puede" in semaforo:
+                if semaforo == "se puede consumir":
                     respuesta_encontrada = f"🟢 **{alimento.capitalize()}**: Se puede consumir libremente en la dieta para diálisis."
-                elif "moderación" in semaforo:
+                elif semaforo == "con moderacion":
                     respuesta_encontrada = f"🟡 **{alimento.capitalize()}**: Se debe consumir con moderación e idealmente bajo las especificaciones de tu nutriólogo."
                 else:
                     respuesta_encontrada = f"🔴 **{alimento.capitalize()}**: No se puede consumir. Es un alimento peligroso para pacientes en diálisis."
                 break
 
-    # 3. PASO: Si no es alimento ni tema de apuntes, usar la Inteligencia Artificial de OpenAI
+    # 4. PASO: Si no se encuentra nada, intentar OpenAI (Si falla, da un mensaje sugerente)
     if not respuesta_encontrada:
         try:
             response = openai.ChatCompletion.create(
@@ -134,11 +147,10 @@ if user_query := st.chat_input("Escribe el nombre de un alimento o consulta"):
                 ]
             )
             respuesta_encontrada = response.choices[0].message.content
-        except Exception as e:
-            respuesta_encontrada = "Lo siento, no tengo esa información detallada en este momento. Recuerda que este chatbot fue creado con fines educativos."
+        except:
+            respuesta_encontrada = "Para ese alimento o consulta en específico, te recomiendo consultarlo directamente con tu nefrólogo o nutriólogo renal para evitar riesgos en tu tratamiento. Puedes intentar preguntándome por alimentos de la vida diaria como: *arroz, manzana, embutidos o refresco claro*."
 
     # Guardar y mostrar la respuesta del Chatbot
     st.session_state.messages.append({"role": "assistant", "content": respuesta_encontrada})
     with st.chat_message("assistant"):
         st.write(respuesta_encontrada)
-            
