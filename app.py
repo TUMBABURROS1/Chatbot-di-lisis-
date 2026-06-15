@@ -12,70 +12,70 @@ except:
 
 # Base de datos completa de alimentos
 alimentos_db = {
-    # SE PUEDE CONSUMIR (Verde)
-    "pechuga de pollo": "se puede consumir",
-    "pechuga de pavo": "se puede consumir",
-    "clara de huevo": "se puede consumir",
-    "claras de huevo": "se puede consumir",
-    "ejotes": "se puede consumir",
-    "pimiento morron": "se puede consumir",
-    "cebolla blanca": "se puede consumir",
-    "ajo": "se puede consumir",
-    "zanahoria cocida": "se puede consumir",
-    "pera": "se puede consumir",
-    "fresas": "se puede consumir",
-    "arandanos": "se puede consumir",
-    "uva": "se puede consumir",
-    "uvas": "se puede consumir",
-    "gelatina": "se puede consumir",
-    "manzana": "se puede consumir",
-    "arroz": "se puede consumir",
-    
+    # NO SE PUEDEN CONSUMIR (Rojo) - Prioridad alta en la búsqueda
+    "refrescos oscuros": "🔴 **Refrescos oscuros**: No se pueden consumir. Son peligrosos por su alto contenido de fósforo aditivo.",
+    "refresco oscuro": "🔴 **Refresco oscuro**: No se puede consumir. Es peligroso por su alto contenido de fósforo aditivo.",
+    "refresco negro": "🔴 **Refresco negro**: No se puede consumir. Es peligroso por su alto contenido de fósforo aditivo.",
+    "queso amarillo": "🔴 **Queso amarillo**: No se puede consumir. Es un queso procesado muy alto en sodio y fósforo.",
+    "queso tipo americano": "🔴 **Queso tipo americano**: No se puede consumir. Es procesado y dañino para los riñones.",
+    "quesos procesados": "🔴 **Quesos procesados**: No se pueden consumir por su alta cantidad de aditivos de sodio y fósforo.",
+    "frutos secos": "🔴 **Frutos secos**: No se pueden consumir por su altísimo contenido de potasio y fósforo.",
+    "cerveza": "🔴 **Cerveza**: No se puede consumir. Altera el equilibrio de líquidos y aporta fósforo innecesario.",
+    "chocolates": "🔴 **Chocolates**: No se pueden consumir por sus niveles elevados de potasio y fósforo.",
+    "embutidos": "🔴 **Embutidos**: No se pueden consumir. Tienen demasiado sodio y conservadores perjudiciales.",
+    "sopas instantaneas": "🔴 **Sopas instantáneas**: No se pueden consumir. Su contenido de sodio es crítico.",
+    "alimentos enlatados": "🔴 **Alimentos enlatados**: No se pueden consumir debido al exceso de sodio usado para conservarlos.",
+    "botana salada": "🔴 **Botana salada**: No se puede consumir. Aumenta gravemente la sed y la presión arterial.",
+    "salsa embotellada": "🔴 **Salsa embotellada**: No se puede consumir por la cantidad oculta de sodio.",
+    "comida rapida": "🔴 **Comida rápida**: No se puede consumir. Es alta en sodio, fósforo y grasas saturadas.",
+    "encurtidos": "🔴 **Encurtidos**: No se pueden consumir. Están sumergidos en altas cantidades de sal.",
+    "carne ahumada": "🔴 **Carne ahumada**: No se puede consumir por su excesiva carga de sodio.",
+    "pescado ahumado": "🔴 **Pescado ahumado**: No se puede consumir por su excesiva carga de sodio.",
+    "carambola": "🔴 **Carambola**: ¡Prohibido! Contiene una neurotoxina que los riñones en diálisis no pueden filtrar.",
+    "toronja": "🔴 **Toronja**: No se puede consumir. Interfiere de forma peligrosa con múltiples medicamentos.",
+    "caldos": "🔴 **Caldos**: No se pueden consumir. Concentran demasiado potasio y sodio de los ingredientes.",
+    "perros calientes": "🔴 **Perros calientes**: No se pueden consumir. Es carne procesada con exceso de fósforo y sal.",
+    "chili enlatado": "🔴 **Chili enlatado**: No se puede consumir por su alto nivel de sodio en conserva.",
+    "carnes procesadas": "🔴 **Carnes procesadas**: No se pueden consumir. Dañan el control de toxinas en hemodiálisis.",
+    "quesos": "🔴 **Quesos**: En general, la mayoría de los quesos (especialmente maduros o procesados) no se pueden consumir.",
+    "queso": "🔴 **Queso**: En general, la mayoría de los quesos no se pueden consumir por su aporte de fósforo.",
+
     # CON MODERACIÓN (Amarillo)
-    "queso cottage": "con moderacion",
-    "queso cottage bajo en sodio": "con moderacion",
-    "productos integrales": "con moderacion",
-    "lacteos": "con moderacion",
-    "leche": "con moderacion (maximo 1/2 taza al dia)",
-    "sandia": "con moderacion",
-    "refrescos": "con moderacion (solo claros)",
-    "refresco": "con moderacion (solo claros)",
-    "refresco claro": "con moderacion",
-    "refrescos claros": "con moderacion",
-    "aceite": "con moderacion",
-    "aceite de oliva": "con moderacion",
-    "aceite vegetal": "con moderacion",
+    "refresco claro": "🟡 **Refresco claro**: Se debe consumir con moderación e idealmente bajo las especificaciones de tu nutriólogo.",
+    "refrescos claros": "🟡 **Refrescos claros**: Se deben consumir con moderación e idealmente bajo las especificaciones de tu nutriólogo.",
+    "refrescos": "🟡 **Refrescos**: Ojo, solo los refrescos claros se permiten con moderación; los oscuros están prohibidos.",
+    "refresco": "🟡 **Refresco**: Ojo, solo el refresco claro se permite con moderación; los oscuros están prohibidos.",
+    "queso cottage bajo en sodio": "🟡 **Queso cottage bajo en sodio**: Consumir con moderación bajo la vigilancia de tu nutriólogo.",
+    "queso cottage": "🟡 **Queso cottage**: Consumir con moderación por su contenido moderado de fósforo.",
+    "productos integrales": "🟡 **Productos integrales**: Consumir con moderación (aportan más fósforo que los refinados).",
+    "lacteos": "🟡 **Lácteos**: Consumir con estricta moderación por su aporte de calcio y fósforo.",
+    "leche": "🟡 **Leche**: Con moderación (máximo 1/2 taza al día para cuidar los niveles de minerales).",
+    "sandia": "🟡 **Sandía**: Con moderación debido a su alto contenido de agua.",
+    "aceite de oliva": "🟡 **Aceite de oliva**: Con moderación. Es una grasa saludable excelente para aportar calorías.",
+    "aceite vegetal": "🟡 **Aceite vegetal**: Con moderación. Ayuda a dar energía limpia si se cuidan las porciones.",
+    "aceite": "🟡 **Aceite**: Con moderación. Prefiere aceites vegetales como oliva o canola sobre grasas animales.",
     
-    # NO SE PUEDEN CONSUMIR (Rojo)
-    "quesos": "no se puede consumir",
-    "queso": "no se puede consumir",
-    "queso amarillo": "no se puede consumir",
-    "queso tipo americano": "no se puede consumir",
-    "quesos procesados": "no se puede consumir",
-    "frutos secos": "no se puede consumir",
-    "cerveza": "no se puede consumir",
-    "chocolates": "no se puede consumir",
-    "embutidos": "no se puede consumir",
-    "sopas instantaneas": "no se puede consumir",
-    "alimentos enlatados": "no se puede consumir",
-    "botana salada": "no se puede consumir",
-    "salsa embotellada": "no se puede consumir",
-    "comida rapida": "no se puede consumir",
-    "encurtidos": "no se puede consumir",
-    "carne ahumada": "no se puede consumir",
-    "pescado ahumado": "no se puede consumir",
-    "carambola": "no se puede consumir",
-    "toronja": "no se puede consumir",
-    "caldos": "no se puede consumir",
-    "perros calientes": "no se puede consumir",
-    "chili enlatado": "no se puede consumir",
-    "carnes procesadas": "no se puede consumir",
-    "refrescos oscuros": "no se puede consumir",
-    "refresco oscuro": "no se puede consumir",
-    "refresco negro": "no se puede consumir",
+    # SE PUEDE CONSUMIR (Verde)
+    "pechuga de pollo": "🟢 **Pechuga de pollo**: Se puede consumir libremente (proteína de alta calidad con pocas toxinas).",
+    "pechuga de pavo": "🟢 **Pechuga de pavo**: Se puede consumir libremente (excelente fuente de proteína limpia).",
+    "clara de huevo": "🟢 **Clara de huevo**: Se puede consumir libremente. Es la proteína más limpia disponible.",
+    "claras de huevo": "🟢 **Claras de huevo**: Se pueden consumir libremente. Ideal para pacientes en diálisis.",
+    "ejotes": "🟢 **Ejotes**: Se pueden consumir libremente (verdura baja en potasio).",
+    "pimiento morron": "🟢 **Pimiento morrón**: Se puede consumir libremente en tus platillos.",
+    "cebolla blanca": "🟢 **Cebolla blanca**: Se puede conocer libremente para dar sabor sin sal.",
+    "ajo": "🟢 **Ajo**: Se puede consumir libremente. Excelente sazonador natural.",
+    "zanahoria cocida": "🟢 **Zanahoria cocida**: Se puede consumir libremente en las porciones recomendadas.",
+    "pera": "🟢 **Pera**: Se puede consumir libremente (fruta con bajo aporte de potasio).",
+    "fresas": "🟢 **Fresas**: Se pueden consumir libremente (bajas en potasio y ricas en antioxidantes).",
+    "arandanos": "🟢 **Arándanos**: Se pueden consumir libremente. Apoyan además la salud urinaria.",
+    "uva": "🟢 **Uva**: Se puede consumir libremente como opción de fruta segura.",
+    "uvas": "🟢 **Uvas**: Se pueden consumir libremente en la dieta diaria.",
+    "gelatina": "🟢 **Gelatina**: Se puede consumir libremente (pero controla el líquido total del día).",
+    "manzana": "🟢 **Manzana**: Se puede consumir libremente. Una de las mejores frutas renales.",
+    "arroz": "🟢 **Arroz**: Se puede consumir libremente (aporta energía y es bajo en minerales).",
 }
 
-# Respuestas temáticas conceptuales basadas en tus apuntes
+# Respuestas temáticas conceptuales basadas en tus apuntes técnicos
 respuestas_tematicas = {
     "liquidos": "Durante la hemodiálisis, las toxinas y excesos de líquidos pueden acumularse en el organismo. El exceso de líquidos puede causar aumento de peso entre sesiones, cambios en la presión arterial, problemas cardíacos graves e incluso acumulación en los pulmones dificultando la respiración. Se debe limitar estrictamente el sodio, potasio y fósforo para ayudar a controlarlo.",
     "agua": "Durante la hemodiálisis, las toxinas y excesos de líquidos pueden acumularse en el organismo. El exceso de líquidos puede causar aumento de peso entre sesiones, cambios en la presión arterial, problemas cardíacos graves e incluso acumulación en los pulmones dificultando la respiración. Se debe limitar estrictamente el sodio, potasio y fósforo para ayudar a controlarlo.",
@@ -106,7 +106,7 @@ if user_query := st.chat_input("Escribe el nombre de un alimento o consulta"):
     with st.chat_message("user"):
         st.write(user_query)
         
-    # Procesar texto: minúsculas, quitar espacios y eliminar acentos manualmente
+    # Procesar texto: minúsculas, sin espacios extras y sin acentos
     query_lower = user_query.lower().strip()
     quitar_acentos = str.maketrans("áéíóúü", "aeiouu")
     query_lower = query_lower.translate(quitar_acentos)
@@ -117,26 +117,47 @@ if user_query := st.chat_input("Escribe el nombre de un alimento o consulta"):
     if query_lower in saludos_db:
         respuesta_encontrada = "Hola, buen día, ¿en qué te gustaría que te ayudara en el día de hoy? 😀"
 
-    # 2. PASO: Verificar si coincide con algún tema de los apuntes
+    # 2. PASO: LÓGICA DE TU LIBRETA (Económica / Saludable / Recetas)
+    if not respuesta_encontrada:
+        if "preparar un alimento" in query_lower or ("receta" in query_lower and "economica" not in query_lower):
+            respuesta_encontrada = "¡Con gusto! Aquí te dejo algunas recetas para que puedas preparar el día de hoy:\n\n• **Huevos revueltos** (usar solo las claras)\n\nTe pareció bien las recetas que te recomendé, ¿o gustas que te diga más recetas con ingredientes específicos?"
+            
+        elif "economica" in query_lower and "saludable" in query_lower:
+            respuesta_encontrada = "Claro, con gusto, aquí tienes más recetas:\n\n• **Arroz blanco** (Es recomendable remojar las verduras y cambiarles el agua antes de cocinar para reducir su potasio)"
+
+    # 3. PASO: Verificar si coincide con algún tema conceptual de los apuntes
     if not respuesta_encontrada:
         for tema, texto in respuestas_tematicas.items():
             if tema in query_lower:
                 respuesta_encontrada = f"🤖 **Información sobre {tema.capitalize()}:** {texto}\n\n*Recuerda que este chatbot fue creado con fines educativos.*"
                 break
             
-    # 3. PASO: Verificar si coincide con la base de datos de alimentos
+    # 4. PASO: Lógica Multi-alimento para combinar cosas
     if not respuesta_encontrada:
-        for alimento, semaforo in alimentos_db.items():
+        alimentos_detectados = []
+        ya_agregados = set()
+        
+        for alimento, texto_respuesta in alimentos_db.items():
             if alimento in query_lower:
-                if semaforo == "se puede consumir":
-                    respuesta_encontrada = f"🟢 **{alimento.capitalize()}**: Se puede consumir libremente en la dieta para diálisis."
-                elif semaforo == "con moderacion":
-                    respuesta_encontrada = f"🟡 **{alimento.capitalize()}**: Se debe consumir con moderación e idealmente bajo las especificaciones de tu nutriólogo."
-                else:
-                    respuesta_encontrada = f"🔴 **{alimento.capitalize()}**: No se puede consumir. Es un alimento peligroso para pacientes en diálisis."
-                break
+                es_subcadena = False
+                for ya_agregado in ya_agregados:
+                    if alimento in ya_agregado:
+                        es_subcadena = True
+                        break
+                
+                if not es_subcadena and alimento not in ya_agregados:
+                    alimentos_detectados.append(texto_respuesta)
+                    ya_agregados.add(alimento)
+        
+        if alimentos_detectados:
+            respuesta_encontrada = "📋 **Resultados de tu consulta:**\n\n" + "\n".join([f"- {res}" for res in alimentos_detectados])
 
-    # 4. PASO: Si no se encuentra nada, intentar OpenAI (Si falla, da un mensaje sugerente)
+    # 5. PASO: LÓGICA DE TU LIBRETA (Mensaje genérico "Puedo consumir...?")
+    if not respuesta_encontrada and "puedo consumir" in query_lower:
+        # Si preguntó por consumir algo y no se detectó en la lista, da los dos estados de la libreta organizados de forma educativa
+        respuesta_encontrada = "Depende del alimento en específico:\n\n🟢 **Sí**: es muy recomendable y saludable.\n\n🔴 **No**: es muy peligroso y puede hacerle daño a la persona."
+
+    # 6. PASO: Si no se encuentra nada en absoluto, intentar OpenAI (Si falla, da el mensaje amigable)
     if not respuesta_encontrada:
         try:
             response = openai.ChatCompletion.create(
