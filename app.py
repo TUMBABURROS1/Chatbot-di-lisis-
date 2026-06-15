@@ -62,6 +62,12 @@ alimentos_db = {
     "melon": "con moderación", 
     "refrescos": "con moderación",
     "sandia": "con moderación",
+    "refresco": "con moderación",
+    "refresco claro": "con moderación",
+    "refrescos claros": "con moderación",
+    "aceite": "con moderación",
+    "aceite de oliva": "con moderación",
+    
 
     # NO SE PUEDEN CONSUMIR - ROJOS (Peligrosos / Evitar por completo)
     "platano": "no se pueden consumir", 
@@ -144,6 +150,7 @@ alimentos_db = {
     "botanas enchiladas industriales": "no se pueden consumir", 
     "papas a la francesa": "no se pueden consumir",
     "alitas": "no se pueden consumir"
+    
 }
 
 def normalizar_texto(texto):
